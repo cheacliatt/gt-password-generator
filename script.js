@@ -16,35 +16,109 @@ function writePassword() {
   console.log(lengthOfPassword);
   // End of Password Length
 
-  
-    var uppers = confirm("Would you like to include uppercase letters?");
-    var lowers = confirm("Would you like to confirm lowercase letters?");
-    var numbers = confirm("Would you like to include numbers?");
-    var specials = confirm("Would you like to include numbers?");
+  // This makes a Super Array called userChoices
+  var upperArray = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ];
+  var lowerArray = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+  var numbersArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  var specialsArray = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
+  var userChoices = [];
 
-    var upperArray = [A-Z];
-    var lowerArray = [a-z];
-    var numbersArray = [0-9];
-    var specialsArray = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
-    var userChoices = [];
+  var uppers = confirm("Press 'OK' to include Uppercase Letters. Otherwise, press 'Cancel.'");
+  var lowers = confirm("Press 'OK' to confirm Lowercase Letters. Otherwise, press 'Cancel.'");
+  var numbers = confirm("Press 'OK' to include Numbers. Otherwise, press 'Cancel.'");
+  var specials = confirm("Press 'OK' to include Special Characters. Otherwise, press 'Cancel.'");
 
-    if (uppers === true) {
-      userChoices = push(upperArray);
-    }
-    if (lowers === true) {
-      userChoices = push(lowerArray);
-    }
-    if (numbers === true) {
-      userChoices = push(numbersArray);
-    }
-    if (specials === true) {
-      userChoices = push(specialsArray);
-    }
-    console.log(userChoices);
-  
-  
+  var userChoices = [];
 
-  var password = generatePassword();
+  if (uppers === true) {
+    userChoices = userChoices.concat(upperArray);
+  }
+  if (lowers === true) {
+    userChoices = userChoices.concat(lowerArray);
+  }
+  if (numbers === true) {
+    userChoices = userChoices.concat(numbersArray);
+  }
+  if (specials === true) {
+    userChoices = userChoices.concat(specialsArray);
+  } else if (
+    uppers === false &&
+    lowers === false &&
+    numbers === false &&
+    specials === false
+  ) {
+    alert("Please enter at least one option.");
+    return writePassword();
+  }
+  console.log(userChoices);
+  // End of the Super Array maker
+
+  
+  // For Loop to randomly pull number from userChoices length, then add random index from super array into password 
+  var password = ""
+
+  for (var i = 0; i < lengthOfPassword; i++) {
+    var randomNumber = Math.floor(Math.random() * userChoices.length);
+    console.log(randomNumber);
+    password += userChoices[randomNumber];
+  }
+  // End of For Loop, and the creation of user password 
+
+  // var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
